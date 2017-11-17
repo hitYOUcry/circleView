@@ -32,7 +32,6 @@ public class CircleView extends View {
         init();
     }
 
-    private Canvas mCanvas;
     private Path mPath;
     private Paint mPaint;
 
@@ -52,7 +51,6 @@ public class CircleView extends View {
 
 
     private void init(){
-        mCanvas = new Canvas();
         mPath = new Path();
         mPaint = new Paint();
         mStartPoint = new Point();
