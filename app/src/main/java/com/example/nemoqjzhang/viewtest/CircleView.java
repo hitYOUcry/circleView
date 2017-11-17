@@ -45,11 +45,11 @@ public class CircleView extends View {
     private Point mCtrlPoint3;
     private Point mCtrlPoint4;
 
-    private float radius = 60;
+    private float radius = 40;
     private float startX = 100;
     private float startY = 200;
 
-    private float endX = 500;
+    private float endX = 600;
     private float endY = 200;
 
     private static final float STAGE1 = 0.2f;
@@ -57,8 +57,8 @@ public class CircleView extends View {
     private static final float STAGE3 = 0.9f;
     private static final float STAGE4 = 1.0f;
 
-    private float mScaleLenX = radius * 1;
-    private float mScaleLenY = radius * 0.4f;
+    private float mScaleLenX = radius * 1.5f;
+    private float mScaleLenY = radius * 0.2f;
 
     private void init() {
         mPath = new Path();
@@ -91,7 +91,7 @@ public class CircleView extends View {
         } else {
             mStartPoint.x = endX;
             mStartPoint.y = endY;
-            mPaint.setColor(Color.parseColor("#B0EA4335"));
+            mPaint.setColor(Color.parseColor("#B04285F4"));
         }
 
         mEndPoint.x = mStartPoint.x;
@@ -99,7 +99,6 @@ public class CircleView extends View {
 
         mPath.reset();
         mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
-        mPaint.setColor(Color.RED);
         if (mInterpolatedTime <= STAGE1) {
             mCtrlPoint1.x = mStartPoint.x + radius * 4 / 3 + mInterpolatedTime / STAGE1 * mScaleLenX;
             mCtrlPoint1.y = mStartPoint.y + mInterpolatedTime / STAGE1 * mScaleLenY ;
@@ -136,7 +135,7 @@ public class CircleView extends View {
             mCtrlPoint2.y = mEndPoint.y;
 
 
-            mCtrlPoint3.x = mStartPoint.x - radius * 4 / 3 - mScaleLenX * (1 - 2.1f * (mInterpolatedTime - STAGE2) / (STAGE3 - STAGE2));
+            mCtrlPoint3.x = mStartPoint.x - radius * 4 / 3 - mScaleLenX * (1 - 1.8f * (mInterpolatedTime - STAGE2) / (STAGE3 - STAGE2));
             mCtrlPoint3.y = mStartPoint.y + mScaleLenY * (1 - (mInterpolatedTime - STAGE2) / (STAGE3 - STAGE2));
 
             mCtrlPoint4.x = mCtrlPoint3.x;
@@ -149,7 +148,7 @@ public class CircleView extends View {
             mCtrlPoint2.x = mEndPoint.x + radius * 4 / 3;
             mCtrlPoint2.y = mEndPoint.y;
 
-            mCtrlPoint3.x = mStartPoint.x - radius * 4 / 3 - mScaleLenX * (1 - 2.1f) * (1 - (mInterpolatedTime - STAGE3) / (STAGE4 - STAGE3));
+            mCtrlPoint3.x = mStartPoint.x - radius * 4 / 3 - mScaleLenX * (1 - 1.8f) * (1 - (mInterpolatedTime - STAGE3) / (STAGE4 - STAGE3));
             mCtrlPoint3.y = mStartPoint.y;
 
             mCtrlPoint4.x = mCtrlPoint3.x;
@@ -173,7 +172,7 @@ public class CircleView extends View {
         canvas.drawPath(mPath, mPaint);
 
         mPaint.setStyle(Paint.Style.STROKE);
-        mPaint.setColor(Color.CYAN);
+        mPaint.setColor(Color.GRAY);
         canvas.drawCircle(startX, startY + radius, radius, mPaint);
         canvas.drawCircle(endX, endY + radius, radius, mPaint);
     }
