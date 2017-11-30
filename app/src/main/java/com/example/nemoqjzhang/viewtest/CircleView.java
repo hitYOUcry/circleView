@@ -52,6 +52,10 @@ public class CircleView extends View {
     private float endX = 600;
     private float endY = 200;
 
+
+    private float midX = (startX + endX) / 2;
+    private float midY = (startY + endY) / 2;
+
     private static final float STAGE1 = 0.2f;
     private static final float STAGE2 = 0.8f;
     private static final float STAGE3 = 0.9f;
@@ -59,6 +63,8 @@ public class CircleView extends View {
 
     private float mScaleLenX = radius * 1.5f;
     private float mScaleLenY = radius * 0.2f;
+
+    private boolean mRevert = true;
 
     private void init() {
         mPath = new Path();
@@ -75,6 +81,10 @@ public class CircleView extends View {
         mPaint.setColor(Color.RED);
         mPaint.setStrokeWidth(5);
         mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+    }
+
+    public void revert(boolean revert){
+        mRevert = revert;
     }
 
     @Override
@@ -154,6 +164,16 @@ public class CircleView extends View {
             mCtrlPoint4.x = mCtrlPoint3.x;
             mCtrlPoint4.y = mEndPoint.y;
 
+
+        }
+        if(mRevert){
+            //y轴对称
+            mCtrlPoint1.x = 2 * midX -  mCtrlPoint1.x;
+            mCtrlPoint2.x = 2 * midX -  mCtrlPoint2.x;
+            mCtrlPoint3.x = 2 * midX -  mCtrlPoint3.x;
+            mCtrlPoint4.x = 2 * midX -  mCtrlPoint4.x;
+            mStartPoint.x = 2 * midX -  mStartPoint.x;
+            mEndPoint.x = 2 * midX -  mEndPoint.x;
 
         }
         Log.i("nemo1", "ctrl1.x = " + mCtrlPoint1.x + ", time = " + mInterpolatedTime);
